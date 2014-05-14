@@ -7,7 +7,11 @@
 <%def name="title()">${parent.title()} - Entity - ${c.entity.label}</%def>
 <%def name="head_title()">${c.entity.label}</%def>
 
+
+
 <h1 id="label">${c.entity.label}</h1>
+
+
 
 <%def name="breadcrumbs(node)">
 <ul class="breadcrumb taxonomy-breadcrumb">
@@ -39,6 +43,7 @@ while current:
   inform us at <strong><span class="iumail">inpho</span></strong>.
 </div>
 </%def>
+
 
 <%def name="printList(attr, alt_title='', limit=10, method='manual', type='idea')">
 %if getattr(c.entity, attr)[:limit]:
@@ -223,3 +228,6 @@ while current:
 				       </script>
 
 </%def>
+
+
+

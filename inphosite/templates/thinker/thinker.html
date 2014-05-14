@@ -12,6 +12,7 @@
 <%def name="title()">Thinker - ${c.entity.label}</%def>
 <%def name="head_title()">${c.entity.label}</%def>
 
+
 ## Body
 <h1 id="label">${h.titlecase(c.entity.label)}</h1>
 %if c.entity.sep_dir:
@@ -95,3 +96,71 @@ ${entity.printAdminPanel(["id", "label", "sep_dir", "searchstring", "wiki", "sea
     </div>
 %endif
 </div> <!-- tab-content -->
+
+
+<script type="text/javascript">
+		
+		//Width and height
+			var w = 300;
+			var h = 200;
+			
+		//Initialize a default force layout, using the nodes and edges in dataset
+			var force = d3.layout.force()
+								 .size([w, h])
+								 .linkDistance([50])
+								 .charge([-100]);
+
+			var colors = d3.scale.category10();
+
+			//Create SVG element
+			var svg = d3.select("body")
+						.insert("svg",["#container"])
+						.attr("width", w)
+						.attr("height", h)
+						.style("position","absolute");
+						
+			//Load json file		
+			d3.json("/js/d3/d3_thinker.json", function(error,graph) {
+			console.log(graph);
+			force
+				.links(graph.links)
+				.nodes(graph.nodes) 
+				.start();
+			
+			//Create edges as lines
+			var edges = svg.selectAll("line")
+				.data(graph.links)
+				.enter()
+				.append("line")
+				.style("stroke", "#ccc")
+				.style("stroke-width", 1);
+			
+			//Create nodes as circles
+			var nodes = svg.selectAll("circle")
+				.data(graph.nodes)
+				.enter()
+				.append("circle")
+				.attr("r", 10)
+				.attr("data-toggle", "tooltip")
+				.attr("title","Test")
+				.style("fill", function(d, i) {
+					return colors(i);
+				})
+				.call(force.drag);
+
+			
+			//Every time the simulation "ticks", this will be called
+			force.on("tick", function() {
+    				edges.attr("x1", function(d) { return d.source.x; })
+	        		.attr("y1", function(d) { return d.source.y; })
+        			.attr("x2", function(d) { return d.target.x; })
+	        		.attr("y2", function(d) { return d.target.y; });
+
+    				nodes.attr("cx", function(d) { return d.x; })
+        			.attr("cy", function(d) { return d.y; });
+  });
+});
+  
+
+
+		</script>

@@ -62,6 +62,8 @@ body {
 	}
 
 #sidebar {
+float:left;
+position:relative;
 }
 
 .taxonomy-breadcrumb {

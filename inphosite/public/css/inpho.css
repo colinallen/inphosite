@@ -271,8 +271,9 @@ body {
 
 #content {
 	top: 155px;
-	position:absolute;
 	padding-bottom:40px;
+	position:relative;
+	clear:both;
     width: 100%;
 }
 	#content a {
