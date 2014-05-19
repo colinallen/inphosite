@@ -1,1 +1,1 @@
-{"nodes": [{"name": 3646}, {"name": 3984}], "links": [{"source": 0, "target": 1}] }
+{"nodes": [{"node": 3646}, {"node": 3984}, {"node": 3646}, {"node": 3645}, {"node": 3646}, {"node": 3582}, {"node": 3646}, {"node": 2637}, {"node": 3646}, {"node": 4097}], "links": [{"source": 0, "target": 1, "value": 2.785e-06}, {"source": 0, "target": 3, "value": -5.6716e-05}, {"source": 0, "target": 5, "value": 6.12352e-05}, {"source": 0, "target": 7, "value": -0.0002306126}, {"source": 0, "target": 9, "value": 3.10093e-05}]}
