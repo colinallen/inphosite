@@ -121,7 +121,7 @@ ${entity.printAdminPanel(["id", "label", "sep_dir", "searchstring", "wiki", "sea
 						
 			//Load json file		
 			d3.json("/js/d3/d3_thinker.json", function(error,graph) {
-			console.log(graph);
+			console.log(graph)
 			force
 				.links(graph.links)
 				.nodes(graph.nodes) 
@@ -148,20 +148,22 @@ ${entity.printAdminPanel(["id", "label", "sep_dir", "searchstring", "wiki", "sea
 				})
 				.call(force.drag);
 
-			
-			//Every time the simulation "ticks", this will be called
-			force.on("tick", function() {
+			nodes.append("title")
+				.text(function(d) {return d.name;});
 
-edges.attr("x1", function(d) { return d.source.x; })
-     .attr("y1", function(d) { return d.source.y; })
-     .attr("x2", function(d) { return d.target.x; })
-     .attr("y2", function(d) { return d.target.y; });
+	//Every time the simulation "ticks", this will be called
+	force.on("tick", function() {
 
-nodes.attr("cx", function(d) { return d.x; })
-     .attr("cy", function(d) { return d.y; });
+	edges.attr("x1", function(d) { return d.source.x; })
+     	.attr("y1", function(d) { return d.source.y; })
+     	.attr("x2", function(d) { return d.target.x; })
+     	.attr("y2", function(d) { return d.target.y; });
 
-});
+	nodes.attr("cx", function(d) { return d.x; })
+     	.attr("cy", function(d) { return d.y; });
+
 	});
+		});
   
 
 
