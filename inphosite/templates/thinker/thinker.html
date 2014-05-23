@@ -101,16 +101,16 @@ ${entity.printAdminPanel(["id", "label", "sep_dir", "searchstring", "wiki", "sea
 <script type="text/javascript">
 		
 		//Width and height
-			var w = 300;
-			var h = 200;
+			var w = 500;
+			var h = 700;
 			
 		//Initialize a default force layout, using the nodes and edges in dataset
 			var force = d3.layout.force()
 								 .size([w, h])
-								 .linkDistance([50])
-								 .charge([-100]);
+								 .linkDistance([100])
+								 .charge([-300]);
 
-			var colors = d3.scale.category10();
+			var colors = d3.scale.category20();
 
 			//Create SVG element
 			var svg = d3.select("body")
@@ -140,7 +140,7 @@ ${entity.printAdminPanel(["id", "label", "sep_dir", "searchstring", "wiki", "sea
 				.data(graph.nodes)
 				.enter()
 				.append("circle")
-				.attr("r", 10)
+				.attr("r", 7)
 				.attr("data-toggle", "tooltip")
 				.attr("title","Test")
 				.style("fill", function(d, i) {

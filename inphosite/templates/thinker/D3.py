@@ -1,4 +1,6 @@
-import json,pprint,urllib2
+from json import loads,dump
+from urllib2 import urlopen
+from pprint import pprint
 
 #Sorts json files to d3 friendly format
 
@@ -7,15 +9,17 @@ nodes = []
 links = []
 
 def sorter(th_id,structure):
-    url_data = urllib2.urlopen("http://inphodev.cogs.indiana.edu:8085/thinker/"+str(th_id)+"/graph.json")
+    url_data = urlopen("http://inphodev.cogs.indiana.edu:8085/thinker/"+str(th_id)+"/graph.json")
     json_data = url_data.read()
-    data = json.loads(json_data)
+    data = loads(json_data)
     sorted_data = data["responseData"]["result"][structure]
-    pprint.pprint(nodes)
     ante_dictionary = {}
     ID = sorted_data.pop(0)
     ante_dictionary["node"] = ID["ante"]
-    nodes.append(ante_dictionary)
+    if ante_dictionary in nodes[:10]:
+        pass
+    else:
+        nodes.append(ante_dictionary)
     
     for x in sorted_data:
         cons_dictionary = {}
@@ -29,21 +33,17 @@ def sorter(th_id,structure):
         else:
             links_dictionary["target"] = nodes.index(cons_dictionary)
         links.append(links_dictionary)
-
-
+    print nodes        
+        
 #Work in progress
-def expander():
+def expansion():
     for x in nodes[1:10]:
-        ID = x.nodes.index(x)
-        sorter(ID["node"],"tt_out")
-
-
-sorter(3646,"tt_out")
-expander()
+        sorter(x["node"],"tt_out")
 
 
 #Write nodes and links to JSON file
-with open("d3_thinker.json","w") as new_file:
-    json.dump({"nodes": nodes[:100], "links": links[:100]}, new_file)
+def writer(File):
+    with open(File,"w") as new_file:
+        dump({"nodes": nodes[:100], "links": links[:100]}, new_file)
 
     
